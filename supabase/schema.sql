@@ -90,6 +90,14 @@ alter table blocks     enable row level security;
 alter table households enable row level security;
 alter table members    enable row level security;
 
+-- 以前のポリシーがある場合は削除
+drop policy if exists "anon full access blocks" on blocks;
+drop policy if exists "anon full access households" on households;
+drop policy if exists "anon full access members" on members;
+drop policy if exists "auth full access blocks" on blocks;
+drop policy if exists "auth full access households" on households;
+drop policy if exists "auth full access members" on members;
+
 -- 誰でも（Anonキー所有者）に全操作許可
 create policy "anon full access blocks"
   on blocks for all to anon using (true) with check (true);
