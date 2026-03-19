@@ -90,13 +90,13 @@ alter table blocks     enable row level security;
 alter table households enable row level security;
 alter table members    enable row level security;
 
--- 認証ユーザーに全操作許可（認証不要なら anon に変更）
-create policy "auth full access blocks"
-  on blocks for all to authenticated using (true) with check (true);
-create policy "auth full access households"
-  on households for all to authenticated using (true) with check (true);
-create policy "auth full access members"
-  on members for all to authenticated using (true) with check (true);
+-- 誰でも（Anonキー所有者）に全操作許可
+create policy "anon full access blocks"
+  on blocks for all to anon using (true) with check (true);
+create policy "anon full access households"
+  on households for all to anon using (true) with check (true);
+create policy "anon full access members"
+  on members for all to anon using (true) with check (true);
 
 -- ============================================================
 --  サンプルデータ
