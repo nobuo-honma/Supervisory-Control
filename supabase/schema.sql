@@ -3,6 +3,11 @@
 --  blocks → households → members の3層構造
 -- ============================================================
 
+-- 既存のテーブルを削除（再実行用）
+drop table if exists members cascade;
+drop table if exists households cascade;
+drop table if exists blocks cascade;
+
 -- 支部テーブル
 create table blocks (
   id   uuid default gen_random_uuid() primary key,
