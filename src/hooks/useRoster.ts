@@ -121,7 +121,7 @@ export function useRoster(filters: SearchFilters) {
   };
 
   // ── Unified: Household + Member ──────────────────
-  const addUnifiedEntry = async (hData: HouseholdInsert, mData: Omit<MemberInsert, 'household_id'>) => {
+  const addUnifiedEntry = async (hData: HouseholdInsert, mDatas: Omit<MemberInsert, 'household_id'>[]) => {
     // 1. 世帯を追加
     const { data: hRes, error: hErr } = await supabase
       .from('households')
@@ -131,16 +131,13 @@ export function useRoster(filters: SearchFilters) {
 
     if (hErr) return { error: hErr.message };
 
-    // 2. メンバーを追加
+    // 2. メンバーを一括追加
+    const membersWithHhId = mDatas.map(m => ({ ...m, household_id: hRes.id }));
     const { error: mErr } = await supabase
       .from('members')
-      .insert([{ ...mData, household_id: hRes.id }]);
+      .insert(membersWithHhId);
 
-    if (mErr) {
-      // メンバー追加に失敗した場合は世帯も消すべきかもしれないが、
-      // ここではエラーを返すにとどめる
-      return { error: mErr.message };
-    }
+    if (mErr) return { error: mErr.message };
 
     await fetch();
     return { error: null };

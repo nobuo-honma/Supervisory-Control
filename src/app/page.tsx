@@ -82,8 +82,8 @@ export default function RosterPage() {
     setModal(null); setDelErr(null);
   };
 
-  const handleAddUnifiedEntry = async (hData: HouseholdInsert, mData: Omit<MemberInsert, 'household_id'>) => {
-    const res = await addUnifiedEntry(hData, mData);
+  const handleAddUnifiedEntry = async (hData: HouseholdInsert, mDatas: Omit<MemberInsert, 'household_id'>[]) => {
+    const res = await addUnifiedEntry(hData, mDatas);
     if (!res.error) setModal(null);
     return res;
   };
