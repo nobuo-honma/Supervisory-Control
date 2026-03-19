@@ -110,12 +110,14 @@ export function useRoster(filters: SearchFilters) {
 
   const updateMember = async (id: string, data: MemberUpdate) => {
     const { error } = await supabase.from('members').update(data).eq('id', id);
+    if (error) console.error('updateMember error:', error);
     if (!error) await fetch();
     return { error: error?.message ?? null };
   };
 
   const deleteMember = async (id: string) => {
     const { error } = await supabase.from('members').delete().eq('id', id);
+    if (error) console.error('deleteMember error:', error);
     if (!error) await fetch();
     return { error: error?.message ?? null };
   };

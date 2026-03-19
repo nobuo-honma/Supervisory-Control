@@ -30,10 +30,29 @@ const emptyMember = (householdId: string): MemberInsert => ({
   notes: null,
 });
 
+const sanitizeMember = (m: Member): MemberInsert => ({
+  household_id: m.household_id,
+  card_type: m.card_type,
+  name: m.name,
+  name_kana: m.name_kana,
+  division: m.division,
+  position: m.position,
+  gakkai_study: m.gakkai_study,
+  is_present: m.is_present,
+  phone: m.phone,
+  email: m.email,
+  birth_date: m.birth_date,
+  faith_date: m.faith_date,
+  has_newspaper: m.has_newspaper,
+  visited: m.visited,
+  attended: m.attended,
+  notes: m.notes,
+});
+
 export default function MemberForm({ initial, household, onSubmit, onCancel }: Props) {
   const [form, setForm] = useState<MemberInsert>(
     initial
-      ? { ...initial }
+      ? sanitizeMember(initial)
       : emptyMember(household.id)
   );
   const [submitting, setSubmitting] = useState(false);
