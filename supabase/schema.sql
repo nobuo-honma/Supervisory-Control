@@ -135,12 +135,12 @@ insert into members
    phone, email, birth_date, faith_date, has_newspaper, visited, attended)
 select
   h1.id,'世帯','山田 太郎','やまだ たろう','壮年部','ブロック長','教授',true,
-  '090-0001-0001', 'yamada@example.com','1960-04-01','1985-06-15',true,true,true
+  '090-0001-0001', 'yamada@example.com','1960-04-01'::date,'1985-06-15'::date,true,true,true
 from h1
 union all
 select
   h1.id,'連名','山田 花子','やまだ はなこ','女性部','副ブロック長','大教学',true,
-  '090-0001-0002', 'hanako@example.com','1963-08-20','1985-06-15',true,false,true
+  '090-0001-0002', 'hanako@example.com','1963-08-20'::date,'1985-06-15'::date,true,false,true
 from h1;
 
 with h2 as (
@@ -151,5 +151,5 @@ insert into members
    phone, birth_date, faith_date, has_newspaper, visited, attended)
 select
   h2.id,'個人','鈴木 次郎','すずき じろう','男子部',true,
-  '090-0002-0001','1995-03-10','2010-01-01',false,true,false
+  '090-0002-0001','1995-03-10'::date,'2010-01-01'::date,false,true,false
 from h2;
