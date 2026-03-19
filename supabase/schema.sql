@@ -118,16 +118,16 @@ with h1 as (
   select id from households where address = '岩見沢市1条1丁目1-1' limit 1
 )
 insert into members
-  (household_id, card_type, name, name_kana, division, position, is_present,
-   phone, birth_date, faith_date, has_newspaper, visited, attended)
+  (household_id, card_type, name, name_kana, division, position, gakkai_study, is_present,
+   phone, email, birth_date, faith_date, has_newspaper, visited, attended)
 select
-  h1.id,'世帯','山田 太郎','やまだ たろう','壮年部','ブロック長',true,
-  '090-0001-0001','1960-04-01','1985-06-15',true,true,true
+  h1.id,'世帯','山田 太郎','やまだ たろう','壮年部','ブロック長','教授',true,
+  '090-0001-0001', 'yamada@example.com','1960-04-01','1985-06-15',true,true,true
 from h1
 union all
 select
-  h1.id,'連名','山田 花子','やまだ はなこ','女性部','副ブロック長',true,
-  '090-0001-0002','1963-08-20','1985-06-15',true,false,true
+  h1.id,'連名','山田 花子','やまだ はなこ','女性部','副ブロック長','大教学',true,
+  '090-0001-0002', 'hanako@example.com','1963-08-20','1985-06-15',true,false,true
 from h1;
 
 with h2 as (

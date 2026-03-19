@@ -7,6 +7,7 @@ import SearchBar from '@/components/SearchBar';
 import HouseholdCard from '@/components/HouseholdCard';
 import HouseholdForm from '@/components/HouseholdForm';
 import MemberForm from '@/components/MemberForm';
+import UnifiedEntryForm from '@/components/UnifiedEntryForm';
 import type {
   Household, Member,
   HouseholdInsert, MemberInsert,
@@ -30,6 +31,7 @@ export default function RosterPage() {
     households, loading, error,
     addHousehold, updateHousehold, deleteHousehold,
     addMember, updateMember, deleteMember,
+    addUnifiedEntry,
   } = useRoster(filters);
 
   const [modal, setModal] = useState<Modal>(null);
@@ -78,6 +80,12 @@ export default function RosterPage() {
     const res = await deleteMember(modal.member.id);
     if (res.error) { setDelErr(res.error); return; }
     setModal(null); setDelErr(null);
+  };
+
+  const handleAddUnifiedEntry = async (hData: HouseholdInsert, mData: Omit<MemberInsert, 'household_id'>) => {
+    const res = await addUnifiedEntry(hData, mData);
+    if (!res.error) setModal(null);
+    return res;
   };
 
   // ── Add block ───────────────────────────────
@@ -163,7 +171,7 @@ export default function RosterPage() {
 
       {/* モーダル群 */}
       {modal?.type === 'addHousehold' && (
-        <HouseholdForm blocks={blocks} onSubmit={handleAddHousehold} onCancel={() => setModal(null)} />
+        <UnifiedEntryForm blocks={blocks} onSubmit={handleAddUnifiedEntry} onCancel={() => setModal(null)} />
       )}
       {modal?.type === 'editHousehold' && (
         <HouseholdForm initial={modal.hh} blocks={blocks} onSubmit={handleEditHousehold} onCancel={() => setModal(null)} />

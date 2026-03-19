@@ -75,8 +75,10 @@ export default function HouseholdCard({
             <span>氏名</span>
             <span>部別</span>
             <span>役職</span>
+            <span>教学</span>
             <span>所在</span>
             <span>電話番号</span>
+            <span>メール</span>
             <span>生年月日</span>
             <span>年齢</span>
             <span>入信日</span>
@@ -94,8 +96,10 @@ export default function HouseholdCard({
               </span>
               <span className="cell-small">{m.division ?? '—'}</span>
               <span className="cell-small">{m.position ?? '—'}</span>
+              <span className="cell-small">{m.gakkai_study ?? '—'}</span>
               <span>{PRESENCE(m.is_present)}</span>
               <span className="cell-phone">{m.phone ?? '—'}</span>
+              <span className="cell-email">{m.email ?? '—'}</span>
               <span className="cell-small">{fmt(m.birth_date)}</span>
               <span className="cell-small">{calcAge(m.birth_date)}</span>
               <span className="cell-small">{fmt(m.faith_date)}</span>
