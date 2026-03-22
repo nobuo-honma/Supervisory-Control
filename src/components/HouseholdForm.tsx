@@ -25,7 +25,7 @@ export default function HouseholdForm({ initial, blocks, onSubmit, onCancel }: P
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.block_id) { setErr('支部を選択してください。'); return; }
+    if (!form.block_id) { setErr('ブロックを選択してください。'); return; }
     setSubmitting(true); setErr(null);
     const res = await onSubmit(form);
     if (res.error) { setErr(res.error); setSubmitting(false); }
@@ -43,7 +43,7 @@ export default function HouseholdForm({ initial, blocks, onSubmit, onCancel }: P
           <div className="form-section">
             <div className="form-row">
               <div className="form-group form-group--required">
-                <label className="form-label">支部</label>
+                <label className="form-label">ブロック</label>
                 <select className="form-input" value={form.block_id}
                   onChange={e => setForm(p => ({ ...p, block_id: e.target.value }))}>
                   <option value="">選択...</option>

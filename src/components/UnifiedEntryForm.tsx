@@ -76,7 +76,7 @@ export default function UnifiedEntryForm({ blocks, onSubmit, onCancel }: Props) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!hForm.block_id) { setErr('支部を選択してください。'); return; }
+    if (!hForm.block_id) { setErr('ブロックを選択してください。'); return; }
     if (members.some(m => !m.name.trim())) { setErr('すべてのメンバーの氏名を入力してください。'); return; }
     
     setSubmitting(true); 
@@ -119,7 +119,7 @@ export default function UnifiedEntryForm({ blocks, onSubmit, onCancel }: Props) 
               <h3 className="form-section-title">拠点情報</h3>
               <div className="form-row">
                 <div className="form-group form-group--required">
-                  <label className="form-label">支部</label>
+                  <label className="form-label">ブロック</label>
                   <select className="form-input" value={hForm.block_id}
                     onChange={e => setHForm(p => ({ ...p, block_id: e.target.value }))}>
                     <option value="">選択してください</option>

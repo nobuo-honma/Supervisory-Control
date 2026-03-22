@@ -34,7 +34,7 @@ export default function SearchBar({ filters, onChange, blocks, totalMembers, tot
         </div>
 
         <select className="search-select" value={filters.block_id} onChange={e => set({ block_id: e.target.value })}>
-          <option value="">全支部</option>
+          <option value="">全ブロック</option>
           {blocks.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
 
