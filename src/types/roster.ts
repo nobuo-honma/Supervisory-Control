@@ -35,7 +35,9 @@ export interface Household {
   updated_at: string;
   // joined
   block?: Block;
+  blocks?: Block; // Supabase joined alias fallback
   members?: Member[];
+  cardType?: string; // Legacy support
 }
 
 export interface Member {
